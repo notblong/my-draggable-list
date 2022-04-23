@@ -6,3 +6,28 @@
   margin-right: 10px;
   background: #ebecf0;
 }
+
+.column ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.column ul li {
+  /* background-color: #383838; */
+  padding: 10px 20px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1;
+}
+
+.column li .drag {
+  margin-right: 15px;
+  cursor: move;
+}
+
+.column li svg {
+  height: 2rem;
+  color: #fff;
+}

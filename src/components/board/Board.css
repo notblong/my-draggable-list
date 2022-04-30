@@ -1,4 +1,4 @@
 .board {
 	display: flex;
-	/* border: 1px solid black; */
+	padding-top: 10px;
 }

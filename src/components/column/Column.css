@@ -1,9 +1,10 @@
 .column {
-  border: 1px solid black;
+  border: 0px solid transparent;
   border-radius: 10px;
   width: 300px;
-  height: 500px;
-  margin-right: 10px;
+  height: max-content;
+  min-height: 140px;
+  margin-left: 15px;
   background: #ebecf0;
 }
 
@@ -14,12 +15,8 @@
 }
 
 .column ul li {
-  /* background-color: #383838; */
-  padding: 10px 20px;
+  background-color: #ebecf0;
   position: relative;
-  display: flex;
-  align-items: flex-start;
-  line-height: 1;
 }
 
 .column li .drag {

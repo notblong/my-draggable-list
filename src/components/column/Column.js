@@ -3,36 +3,34 @@ import WorkCard from '../work-card/WorkCard';
 import './Column.css';
 
 function Column(props) {
-  const name = props.name ?? 'Untitled';
-  const [cards, setCards] = useState(["🍰 Cake", "🍩 Donut", "🍎 Apple", "🍕 Pizza"]);
+  const column = props.column;
+  const name = column.name ?? 'Untitled';
+  const [cards, setCards] = useState(column.cards);
   const [dragItem, setDragItem] = useState(null);
   const [dragItemIdx, setDragItemIdx] = useState(null);
 
-  const onDragStart = (e, idx) => {
-    console.log(`on drag [${cards[idx]}]`);
-    setDragItem(cards[idx]);
-    setDragItemIdx(idx);
+  const onDragStart = (e, index) => {
+    console.log(`[${column.uuid}] on drag [${cards[index]}]`);
+    setDragItem(cards[index]);
+    setDragItemIdx(index);
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/html", e.target.parentNode);
     e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
   };
 
-  const onDragOver = (e, idx) => {
+  const onDragOver = (e, index) => {
     e.preventDefault();
-    console.log(`drag from [${dragItemIdx}] to [${idx}]`);
-
-    if (idx === dragItemIdx) return;
-
+    console.log(`[${column.uuid}] drag from [${dragItemIdx}] to [${index}]`);
     let tmp = cards.filter(c => c !== dragItem);
-    tmp.splice(idx, 0, dragItem);
+    tmp.splice(index, 0, dragItem);
     setCards(tmp);
   }
 
   const onDragEnd = () => {
     setDragItem(null);
     setDragItemIdx(null);
+    console.log(`[${column.uuid}] drag end`);
   }
-
 
   return (
     <div className="column">

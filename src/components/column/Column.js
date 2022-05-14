@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PreviewCard from '../preview-card/PreviewCard';
 import WorkCard from '../work-card/WorkCard';
 import './Column.css';
 
@@ -8,6 +9,7 @@ function Column(props) {
   const [cards, setCards] = useState(column.cards);
   const [dragItem, setDragItem] = useState(null);
   const [dragItemIdx, setDragItemIdx] = useState(null);
+  const [dragOverIdx, setDragOverIdx] = useState(null);
 
   const onDragStart = (e, index) => {
     console.log(`[${column.uuid}] on drag [${cards[index]}]`);
@@ -21,14 +23,16 @@ function Column(props) {
   const onDragOver = (e, index) => {
     e.preventDefault();
     console.log(`[${column.uuid}] drag from [${dragItemIdx}] to [${index}]`);
+    setDragOverIdx(index);
     let tmp = cards.filter(c => c !== dragItem);
     tmp.splice(index, 0, dragItem);
     setCards(tmp);
   }
 
-  const onDragEnd = () => {
+  const onDragEnd = (e) => {
     setDragItem(null);
     setDragItemIdx(null);
+    setDragOverIdx(null);
     console.log(`[${column.uuid}] drag end`);
   }
 
@@ -41,9 +45,13 @@ function Column(props) {
             <div
               draggable
               onDragStart={e => onDragStart(e, idx)}
-              onDragEnd={onDragEnd}
+              onDragEnd={e => onDragEnd(e)}
             >
-              <WorkCard name={card}></WorkCard>
+              {dragOverIdx !== idx && <WorkCard name={card}></WorkCard>}
+              {dragOverIdx === idx && <PreviewCard></PreviewCard>}
+
+              {/* <WorkCard name={card}></WorkCard>
+              <PreviewCard></PreviewCard> */}
             </div>
           </li>
         ))}

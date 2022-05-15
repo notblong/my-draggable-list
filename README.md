@@ -7,6 +7,8 @@ This repo is focused on:
 * Learning React
 * Drag feature without using any external libs
 
+Demo: https://devvdevv.github.io/my-draggable-list/
+
 ## Resources:
 
 Original article:

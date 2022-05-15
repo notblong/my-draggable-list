@@ -1,7 +1,7 @@
 import './WorkCard.css';
 
 function WorkCard(props) {
-  const name = props.name ?? 'Untitled task';
+  const name = props.name ?? 'Untitled';
 
   return (
     <div className='work-card'>

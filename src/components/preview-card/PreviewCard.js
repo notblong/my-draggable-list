@@ -1,7 +1,6 @@
 import './PreviewCard.css';
 
-function PreviewCard(props) {
-
+function PreviewCard() {
   return (
     <div className='preview'>
     </div>

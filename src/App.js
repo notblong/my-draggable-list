@@ -1,10 +1,17 @@
 import './App.css';
-import Board from './components/board/Board';
+import Column from './components/column/Column';
 
 function App() {
+  const column = {
+    name: '✨ Draggable list ✨',
+    cards: ['😺 Cat', '🐶 Dog', '👽 UFO', '🦄 Unicorn']
+  };
+
   return (
-    <div className="App">
-      <Board />
+    <div className='App'>
+      <div className='center'>
+        <Column column={column} />
+      </div>
     </div>
   );
 }

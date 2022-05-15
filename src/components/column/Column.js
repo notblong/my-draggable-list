@@ -8,13 +8,10 @@ function Column(props) {
   const name = column.name ?? 'Untitled';
   const [cards, setCards] = useState(column.cards);
   const [dragItem, setDragItem] = useState(null);
-  const [dragItemIdx, setDragItemIdx] = useState(null);
   const [dragOverIdx, setDragOverIdx] = useState(null);
 
   const onDragStart = (e, index) => {
-    console.log(`[${column.uuid}] on drag [${cards[index]}]`);
     setDragItem(cards[index]);
-    setDragItemIdx(index);
     e.dataTransfer.effectAllowed = "move";
     e.dataTransfer.setData("text/html", e.target.parentNode);
     e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
@@ -22,18 +19,15 @@ function Column(props) {
 
   const onDragOver = (e, index) => {
     e.preventDefault();
-    console.log(`[${column.uuid}] drag from [${dragItemIdx}] to [${index}]`);
     setDragOverIdx(index);
     let tmp = cards.filter(c => c !== dragItem);
     tmp.splice(index, 0, dragItem);
     setCards(tmp);
   }
 
-  const onDragEnd = (e) => {
+  const onDragEnd = () => {
     setDragItem(null);
-    setDragItemIdx(null);
     setDragOverIdx(null);
-    console.log(`[${column.uuid}] drag end`);
   }
 
   return (
@@ -45,13 +39,10 @@ function Column(props) {
             <div
               draggable
               onDragStart={e => onDragStart(e, idx)}
-              onDragEnd={e => onDragEnd(e)}
+              onDragEnd={onDragEnd}
             >
               {dragOverIdx !== idx && <WorkCard name={card}></WorkCard>}
               {dragOverIdx === idx && <PreviewCard></PreviewCard>}
-
-              {/* <WorkCard name={card}></WorkCard>
-              <PreviewCard></PreviewCard> */}
             </div>
           </li>
         ))}
